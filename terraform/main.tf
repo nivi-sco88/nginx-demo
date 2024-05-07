@@ -1,19 +1,3 @@
-# main.tf
-
-terraform {
-  backend "s3" {
-    bucket         = "my-bucket"
-    key            = "terraform.tfstate"  # Change this if you want to use a different filename
-    region         = "eu-central-1"  # Change to your desired region
-    dynamodb_table = "terraform_locks"  # Use DynamoDB for state locking
-  }
-}
-
-# provider.tf
-provider "aws" {
-  region = "eu-central-1"  # Change this to your desired region
-}
-
 # s3_bucket.tf
 
 resource "aws_s3_bucket" "terraform_state_bucket" {
@@ -143,5 +127,14 @@ resource "aws_dynamodb_table" "terraform_locks" {
   attribute {
     name = "LockID"
     type = "S"
+  }
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "my-bucket"
+    key            = "terraform.tfstate"  # Change this if you want to use a different filename
+    region         = "eu-central-1"  # Change to your desired region
+    dynamodb_table = "terraform_locks"  # Use DynamoDB for state locking
   }
 }

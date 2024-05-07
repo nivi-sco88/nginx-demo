@@ -27,10 +27,13 @@ jobs:
           aws-region: eu-central-1  # Change to your desired region
 
       - name: Terraform Init
+        working-directory: terraform/
         run: terraform init
 
       - name: Terraform Plan
+        working-directory: terraform/
         run: terraform plan
 
       - name: Terraform Apply
+        working-directory: terraform/
         run: terraform apply -auto-approve

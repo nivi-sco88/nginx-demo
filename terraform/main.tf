@@ -1,8 +1,3 @@
-# provider.tf
-provider "aws" {
-  region = "eu-central-1"  # Change this to your desired region
-}
-
 # main.tf
 
 terraform {
@@ -12,6 +7,11 @@ terraform {
     region         = "eu-central-1"  # Change to your desired region
     dynamodb_table = "terraform_locks"  # Use DynamoDB for state locking
   }
+}
+
+# provider.tf
+provider "aws" {
+  region = "eu-central-1"  # Change this to your desired region
 }
 
 # VPC

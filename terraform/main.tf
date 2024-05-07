@@ -14,6 +14,16 @@ provider "aws" {
   region = "eu-central-1"  # Change this to your desired region
 }
 
+# s3_bucket.tf
+
+resource "aws_s3_bucket" "terraform_state_bucket" {
+  bucket = "my-bucket"
+
+  tags = {
+    Name = "Terraform State Bucket"
+  }
+}
+
 # VPC
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -28,17 +38,6 @@ resource "aws_subnet" "external_subnet" {
   vpc_id     = aws_vpc.my_vpc.id
   cidr_block = "10.0.2.0/24"
 }
-
-# s3_bucket.tf
-
-resource "aws_s3_bucket" "terraform_state_bucket" {
-  bucket = "my-bucket"
-
-  tags = {
-    Name = "Terraform State Bucket"
-  }
-}
-
 
 # EKS Cluster
 module "eks" {
